@@ -1,20 +1,37 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Dating App</a>
-    <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ | async">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Matches</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Lists</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Messages</a>
-      </li>
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active"
+      >Dating App</a
+    >
+    <ul class="navbar-nav mr-auto">
+      <!--Angular container it is very useful if we want apply conditional to something it will not show any html we will use ng conatiner to hide the links inside it and it dont genrate html and interfere our styling-->
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/members" routerLinkActive="active">
+            Matches</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lists" routerLinkActive="active"
+            >Lists</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/messages" routerLinkActive="active"
+            >Messages</a
+          >
+        </li>
+      </ng-container>
     </ul>
     <!--We are checking do we have that current user object by usong async pipe-->
-    <div class="dropdown" dropdown *ngIf="accountService.currentUser$ | async">
-      <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
+    <div
+      class="dropdown"
+      dropdown
+      *ngIf="accountService.currentUser$ | async as user"
+    >
+      <a class="dropdown-toggle text-light" dropdownToggle
+        >Welcome {{ user.username | titlecase }}</a
+      >
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item">Edit Profile</a>
         <div class="dropdown-divider"></div>
@@ -44,9 +61,7 @@
         type="password"
         placeholder="Password"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Login
-      </button>
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
     </form>
   </div>
 </nav>
