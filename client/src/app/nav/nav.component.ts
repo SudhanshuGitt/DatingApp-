@@ -27,18 +27,10 @@ export class NavComponent implements OnInit {
 
   login() {
     // login method is returning us observable and observable is lazy it will not do anything until we subscribe to observable
-    this.accountService.login(this.model).subscribe(
-      (response) => {
-        this.router.navigateByUrl('/members');
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-
-        // we will see reason whu our login failed
-        this.toastr.error(error.error);
-      }
-    );
+    this.accountService.login(this.model).subscribe((response) => {
+      this.router.navigateByUrl('/members');
+      console.log(response);
+    });
   }
 
   logout() {
